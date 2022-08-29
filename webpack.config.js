@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve('./dist'),
-    assetModuleFilename: '[hash][ext][query]' //file-loader output
+    assetModuleFilename: '[name][ext]?[hash]' //file-loader output
   },
   module: {
     rules: [
@@ -28,10 +28,10 @@ module.exports = {
       //     }
       //   }
       // },
-      { //file-loader 만 사용시
-        test: /\.png/,
-        type: 'asset/resource',
-      }
+      // { //file-loader 만 사용시
+      //   test: /\.png/,
+      //   type: 'asset/resource',
+      // }
     ]
   }
 }
