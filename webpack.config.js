@@ -1,6 +1,5 @@
-const webpack = require('webpack');
 const path = require('path');
-const MyWebpackPlugin = require('./my-webpack-plugin');
+const webpack = require('webpack');
 const banner = require('./my-banner-plugin');
 
 module.exports = {
@@ -30,14 +29,15 @@ module.exports = {
             maxSize: 20 * 1024 // 20kb
           }
         }
-      },
-      // { //file-loader 만 사용시
-      //   test: /\.(png|jpg|gif|svg)$/,
-      //   type: 'asset/resource',
-      // }
+      }
     ]
   },
   plugins: [
     new webpack.BannerPlugin(banner),
+    new webpack.DefinePlugin({
+      TWO: '1+1',
+      TWOSTRING: JSON.stringify('1+1'),
+      'api.domain': JSON.stringify('http://dev.api.domain.com')
+    })
   ]
 }
