@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const banner = require('./my-banner-plugin');
 const HtmlWebpackPlugin =require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -49,6 +50,7 @@ module.exports = {
         collapseWhitespace: true,
         removeComments: true,
       } : false
-    })
+    }),
+    new CleanWebpackPlugin()
   ]
 }
