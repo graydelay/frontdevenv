@@ -19,17 +19,17 @@ module.exports = {
           'css-loader',
         ],
       },
-      // { //url-loader 사용시
-      //   test: /\.(jpe?g|gif|png)$/i,
-      //   type: 'asset',
-      //   parser: {
-      //     dataUrlCondition: {
-      //       maxSize: 8 * 1024 // 8kb
-      //     }
-      //   }
-      // },
+      { //url-loader 사용시
+        test: /\.(jpe?g|gif|png)$/i,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 20 * 1024 // 20kb
+          }
+        }
+      },
       // { //file-loader 만 사용시
-      //   test: /\.png/,
+      //   test: /\.(png|jpg|gif|svg)$/,
       //   type: 'asset/resource',
       // }
     ]
