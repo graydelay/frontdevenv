@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const banner = require('./my-banner-plugin');
+const HtmlWebpackPlugin =require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -38,6 +39,16 @@ module.exports = {
       TWO: '1+1',
       TWOSTRING: JSON.stringify('1+1'),
       'api.domain': JSON.stringify('http://dev.api.domain.com')
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      templateParameters: {
+        env: process.env.NODE_ENV === 'development' ? '(개발용)' : ''
+      },
+      minify: process.env.NODE_ENV === 'production' ? {
+        collapseWhitespace: true,
+        removeComments: true,
+      } : false
     })
   ]
 }
