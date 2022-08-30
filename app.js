@@ -1,1 +1,1 @@
-const alert = msg => window.alert(msg); // arrow function es6
+new Promise(); // es6
