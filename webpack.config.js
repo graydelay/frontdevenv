@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    main: './app.js'
+    main: './src/app.js'
   },
   output: {
     filename: '[name].js',
@@ -18,12 +18,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(s[ac]ss|css)$/i,
         use: [
           process.env.NODE_ENV === 'production'
           ? MiniCssExtractPlugin.loader
           : 'style-loader',
           'css-loader',
+          'sass-loader'
         ],
       },
       { //url-loader 사용시
