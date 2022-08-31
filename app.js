@@ -1,3 +1,1 @@
-var foo = "";
-
 console.log();
