@@ -1,1 +1,2 @@
-new Promise(); // es6
+console.log();
+(function () {})();
