@@ -1,4 +1,5 @@
-import './app.scss';
+import './app.css';
+
 import nyancat from './nyancat.jpg';
 
 document.addEventListener('DOMContentLoaded', () => {
