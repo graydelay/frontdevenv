@@ -1,19 +1,28 @@
 const path = require('path');
 const webpack = require('webpack');
-const banner = require('./my-banner-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const banner = require('./my-banner-plugin');
 
 module.exports = {
   mode: 'development',
   entry: {
-    main: './app.js'
+    main: './src/app.js'
   },
   output: {
     filename: '[name].js',
     path: path.resolve('./dist'),
-    assetModuleFilename: '[name][ext]?[hash]' //file-loader output
+    assetModuleFilename: '[name][ext]?[hash]' // file-loader output
+  },
+  devServer: {
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      }
+    },
+    port: 8090,
   },
   module: {
     rules: [
@@ -27,7 +36,7 @@ module.exports = {
           'sass-loader'
         ],
       },
-      { //url-loader 사용시
+      { // url-loader 사용시
         test: /\.(jpe?g|gif|png)$/i,
         type: 'asset',
         parser: {

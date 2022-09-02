@@ -3,14 +3,21 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["eslint:recommended", "eslint-config-prettier"],
+  extends: [
+    'airbnb',
+    // 'eslint:recommended',
+    'prettier'
+  ],
   overrides: [],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["prettier"],
+  plugins: ['prettier'],
   rules: {
-    "prettier/prettier": "error",
+    quotes: [
+      1,
+      'single'
+    ],
   },
 };
