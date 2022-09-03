@@ -5,9 +5,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const banner = require('./my-banner-plugin');
 const apiMocker = require('connect-api-mocker');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  mode: 'development',
+  mode,
   entry: {
     main: './src/app.js'
   },
@@ -34,6 +38,18 @@ module.exports = {
       return middlewares;
     },
     hot: true,
+  },
+  optimization: {
+    minimizer: mode === 'production' ? [
+      new CssMinimizerPlugin(),
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true // 콘솔 로그를 제거한다
+          }
+        }
+      })
+    ] : []
   },
   module: {
     rules: [
