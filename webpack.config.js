@@ -33,6 +33,7 @@ module.exports = {
 
       return middlewares;
     },
+    hot: true,
   },
   module: {
     rules: [
