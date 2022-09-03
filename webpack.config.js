@@ -22,6 +22,30 @@ module.exports = {
         warnings: false,
       }
     },
+    setupMiddlewares: (middlewares, devServer) => {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      devServer.app.get('/api/users', (req, res) => {
+        res.json([
+          {
+            id: 1,
+            name: 'Alice'
+          },
+          {
+            id: 2,
+            name: 'Bek'
+          },
+          {
+            id: 3,
+            name: 'Chris'
+          }
+        ])
+      });
+
+      return middlewares;
+    },
     port: 8090,
   },
   module: {
