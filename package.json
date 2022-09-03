@@ -21,6 +21,7 @@
     "axios": "^0.27.2",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
+    "connect-api-mocker": "^1.10.0",
     "core-js": "^2.6.12",
     "css-loader": "^6.7.1",
     "eslint": "^8.23.0",

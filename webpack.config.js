@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const banner = require('./my-banner-plugin');
+const apiMocker = require('connect-api-mocker');
 
 module.exports = {
   mode: 'development',
@@ -22,31 +23,16 @@ module.exports = {
         warnings: false,
       }
     },
+    port: 8090,
     setupMiddlewares: (middlewares, devServer) => {
       if (!devServer) {
         throw new Error('webpack-dev-server is not defined');
       }
 
-      devServer.app.get('/api/users', (req, res) => {
-        res.json([
-          {
-            id: 1,
-            name: 'Alice'
-          },
-          {
-            id: 2,
-            name: 'Bek'
-          },
-          {
-            id: 3,
-            name: 'Chris'
-          }
-        ])
-      });
+      devServer.app.use(apiMocker('/api', 'mocks/api'));
 
       return middlewares;
     },
-    port: 8090,
   },
   module: {
     rules: [
