@@ -7,13 +7,15 @@ const banner = require('./my-banner-plugin');
 const apiMocker = require('connect-api-mocker');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
   mode,
   entry: {
-    main: './src/app.js'
+    main: './src/app.js',
+    // result: './src/result.js'
   },
   output: {
     filename: '[name].js',
@@ -49,7 +51,13 @@ module.exports = {
           }
         }
       })
-    ] : []
+    ] : [],
+    // splitChunks: {
+    //   chunks: 'all'
+    // }
+  },
+  externals: {
+    axios: 'axios'
   },
   module: {
     rules: [
@@ -100,6 +108,14 @@ module.exports = {
     ...(process.env.NODE_ENV === 'production'
       ? [new MiniCssExtractPlugin({ filename: '[name].css' })]
       : []
-    )
+    ),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "./node_modules/axios/dist/axios.min.js",
+          to: "./axios.min.js", // 목적지 파일에 들어간다
+        },
+      ],
+    }),
   ]
 }
